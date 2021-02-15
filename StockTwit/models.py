@@ -1,7 +1,7 @@
 from . import db
 
-class StockAnalysis(db.Document):
-    tweets = db.EmbeddedDocumentField(TweetRequest)
-
-class TweetRequest(db.EmbeddedDocument):
+class TweetRequest(db.Document):
     raw_tweets = db.ListField(db.StringField())
+
+#class StockAnalysis(db.Document):
+#    tweets = db.EmbeddedDocumentField(TweetRequest)

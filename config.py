@@ -8,15 +8,12 @@ load_dotenv(path.join(basedir, '.env'))
 class Config:
     """Base config."""
     FLASK_APP = 'wsgi.py'
-    SECRET_KEY = environ.get('SECRET_KEY')
-    #SESSION_COOKIE_NAME = environ.get('SESSION_COOKIE_NAME')
-    #STATIC_FOLDER = 'static'
-    #TEMPLATES_FOLDER = 'templates'
+    CONSUMER_KEY = environ.get('CONSUMER_KEY')
+    CONSUMER_SECRET_KEY = environ.get('CONSUMER_SECRET_KEY')
     MONGODB_SETTINGS = {
     'db': 'bricktime',
-    'host': 'mongodb://127.0.0.1:27017/bricktime'
+    'host': 'mongodb://127.0.0.1:27017/stocktwit'
     }
-
 
 class ProdConfig(Config):
     FLASK_ENV = 'production'
@@ -24,9 +21,9 @@ class ProdConfig(Config):
     TESTING = False
     DATABASE_URI = environ.get('PROD_DATABASE_URI')
 
-
 class DevConfig(Config):
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = True
     DATABASE_URI = environ.get('DEV_DATABASE_URI')
+    

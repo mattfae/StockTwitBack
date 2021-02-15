@@ -1,19 +1,19 @@
 from flask import Response, request
 from flask import current_app as app
-from models import 
+from .models import TweetRequest
 
-"""
+
 @app.route('/tweets/', methods=['GET', 'POST'])
 def get_tweets():
-    if methods == 'GET':
+    if request.method == 'GET':
         print("starting get_tweets")
-        goals = Goal.objects().to_json()
-        return Response(goals, mimetype="application/json", status=200)
+        tweets = TweetRequest.objects().to_json()
+        return Response(tweets, mimetype="application/json", status=200)
 
-   elif methods == 'POST':
+    elif request.method == 'POST':
         print("starting add_tweets")
         body = request.get_json()
-        goal = Goal(**body).save()
-        id = goal.id
+        tweets = TweetRequest(**body)
+        tweets.save()
+        id = tweets.id
         return {'id': str(id)}, 200
-"""
