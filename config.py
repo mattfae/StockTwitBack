@@ -8,10 +8,8 @@ load_dotenv(path.join(basedir, '.env'))
 class Config:
     """Base config."""
     FLASK_APP = 'wsgi.py'
-    CONSUMER_KEY = environ.get('CONSUMER_KEY')
-    CONSUMER_SECRET_KEY = environ.get('CONSUMER_SECRET_KEY')
     MONGODB_SETTINGS = {
-    'db': 'bricktime',
+    'db': 'stocktwit',
     'host': 'mongodb://127.0.0.1:27017/stocktwit'
     }
 
