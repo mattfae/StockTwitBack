@@ -1,8 +1,8 @@
 import tweepy
-from os import environ
+from decouple import config
 
-CONSUMER_KEY = environ.get('TWITTER_CONSUMER_KEY')
-CONSUMER_SECRET_KEY = environ.get('TWITTER_CONSUMER_SECRET_KEY')
+CONSUMER_KEY = config('TWITTER_CONSUMER_KEY')
+CONSUMER_SECRET_KEY = config('TWITTER_CONSUMER_SECRET_KEY')
 
 tweepy_auth = tweepy.AppAuthHandler(CONSUMER_KEY, CONSUMER_SECRET_KEY)
 api = tweepy.API(tweepy_auth)
@@ -16,9 +16,8 @@ class StockTweets:
         self.stock_symbol = f'${_stock_symbol}'
         self.open_date = _open_date
         self.tweets = list()
-        self.tweet_dict = {}
 
     def get_tweets(self):
-        for index, tweet in tweepy.Cursor(api.search, q=self.stock_symbol, until=self.open_date).items(10):
+        for tweet in tweepy.Cursor(api.search, q=self.stock_symbol, until=self.open_date, count=10):
             print("printing tweet", tweet.text)
-            self.tweet_dict[index] = tweet.text
+            self.tweets.append(tweet.text)
