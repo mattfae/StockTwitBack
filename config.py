@@ -13,7 +13,6 @@ class Config:
     'host': 'mongodb://127.0.0.1:27017/stocktwit'
     }
 
-
 class ProdConfig(Config):
     FLASK_ENV = 'production'
     DEBUG = False

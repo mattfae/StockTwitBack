@@ -9,8 +9,7 @@ class TweetRequest(db.Document):
     stock = db.StringField()
     open_date = db.DateTimeField()
     raw_tweets = db.ListField(db.StringField())
-    open_price = db.FloatField()
-    close_price = db.FloatField()
+    raw_av_data = db.DictField()
 
     def save(self, *args, **kwargs):
         if not self.created:
