@@ -41,4 +41,3 @@ class StockTweets:
         self.stock_data = json.loads(resp_data.content.decode('utf-8'))
         
 pdb.set_trace()
-#new = StockTweets('pltr', '2021-02-17')

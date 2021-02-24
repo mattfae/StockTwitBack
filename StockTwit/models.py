@@ -1,7 +1,7 @@
 from . import db
 from datetime import datetime
 
-class TweetRequest(db.Document):
+class Stock(db.Document):
     #pylint: disable=no-member
     created = db.DateTimeField()
     modified = db.DateTimeField(default=datetime.datetime.now())
@@ -9,7 +9,7 @@ class TweetRequest(db.Document):
     stock = db.StringField()
     open_date = db.DateTimeField()
     raw_tweets = db.ListField(db.StringField())
-    raw_av_data = db.DictField()
+    raw_stock_data = db.DictField()
 
     def save(self, *args, **kwargs):
         if not self.created:
