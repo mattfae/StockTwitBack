@@ -6,11 +6,17 @@ class Stock(db.Document):
     created = db.DateTimeField()
     modified = db.DateTimeField(default=datetime.datetime.now())
     
+    #Stock Symbol
     stock = db.StringField()
+    #the open date to compare with the previous day's close
     open_date = db.DateTimeField()
+    #tweets as taken directly from Twitter API
     raw_tweets = db.ListField(db.StringField())
+    #tweets cleaned in preparation for analysis
+    clean_tweets = db.ListField(db.StringField())
+    #stock data taken from Alpha Vantage
     raw_stock_data = db.DictField()
-
+    
     def save(self, *args, **kwargs):
         if not self.created:
             self.created = datetime.datetime.now()
