@@ -1,6 +1,6 @@
 from flask import Response, request, jsonify
 from flask import current_app as app
-from .analyses import StockTweets
+from .stocktweets import StockTweets
 from .models import TweetRequest
 
 

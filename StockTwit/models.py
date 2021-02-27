@@ -11,7 +11,7 @@ class Stock(db.Document):
     #the open date to compare with the previous day's close
     open_date = db.DateTimeField()
     #tweets as taken directly from Twitter API
-    raw_tweets = db.ListField(db.StringField())
+    raw_tweets = db.DictField()
     #tweets cleaned in preparation for analysis
     clean_tweets = db.ListField(db.StringField())
     #stock data taken from Alpha Vantage

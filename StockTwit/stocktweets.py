@@ -22,22 +22,22 @@ class StockTweets:
         self.open_date = datetime.strptime(_open_date, '%Y-%m-%d')
         self.close_date = self.open_date - timedelta(days=1)
         self.tweets = list()
-        self.stock_data = None
+        self.market_data = None
 
     def get_tweets(self):
         #use tweepy to geat relevant tweets
         print("starting get_tweets")
-        for tweet in tweepy.Cursor(api.search, q=f'${self.stock_symbol}', until=self.open_date.strftime("%Y-%m-%d"), count=10).items(10):
-            print("printing tweet", tweet.text)
+        for tweet in tweepy.Cursor(api.search, q=f'${self.stock_symbol}', until=self.open_date.strftime("%Y-%m-%d"), count=5).items(5):
             self.tweets.append(tweet.text)
 
-    def get_close_open(self):
+    def get_market_data(self):
         print(f'starting request for {self.stock_symbol} using {AV_API_KEY}.')
         try:
             resp_data = requests.get(f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={self.stock_symbol}&apikey={AV_API_KEY}')
         except requests.exceptions.ConnectionError:
             print("Connection refused")
         
-        self.stock_data = json.loads(resp_data.content.decode('utf-8'))
+        self.market_data = json.loads(resp_data.content.decode('utf-8'))
         
 pdb.set_trace()
+#new = StockTweets('pltr', '2021-02-25')
