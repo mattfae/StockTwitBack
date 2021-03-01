@@ -21,4 +21,4 @@ class StockTweet(db.Document):
         if not self.created:
             self.created = datetime.datetime.now()
         self.modified = datetime.datetime.now()
-        return super(Stock, self).save(*args, **kwargs)
+        return super(StockTweet, self).save(*args, **kwargs)
