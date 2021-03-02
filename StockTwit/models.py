@@ -14,6 +14,8 @@ class StockTweet(db.Document):
     raw_tweet_data = db.ListField(db.DictField())
     #tweets cleaned in preparation for analysis
     clean_tweets_info = db.ListField(db.DictField())
+    #cleaned tweets + assigned weights from vader
+    scored_tweets = db.ListField(db.DictField())
     #stock data taken from Alpha Vantage
     raw_stock_data = db.DictField()
     

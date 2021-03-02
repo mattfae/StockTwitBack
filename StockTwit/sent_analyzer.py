@@ -1,20 +1,22 @@
+import re
 from nltk import sent_tokenize
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
-    def tokenize_tweets(tweets):
-        all_sentences = []
-        for tweet in tweets:
-            all_sentences += sent_tokenize(tweet)
-        return all_sentences
+def clean_tweet(tweet):
+    tweet = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
+                       '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', tweet)
+    return re.sub("(@[A-Za-z0-9_]+)","", tweet)
+    
+
+def get_sentence_sentiment(sentence):
+    sia = SentimentIntensityAnalyzer()
+    return (f'{sentence}: {sia.polarity_scores(sentence)}')
 
 
-    def analyze_tweets(tweets):
-        sia = SentimentIntensityAnalyzer()
-        tweets_with_scores = list()
-
-        for tweet in tweets:
-            tw_scores = sia.polarity_scores(tweet)
-            tweet_with_scores.append((tweet, tw_scores))
-        
-        return tweets_with_scores
+def process_tweets(tweets):
+    sentences = []
+    for tweet in tweets:
+        for item in sent_tokenize(clean_tweet(tweet)):
+            sentences.append(get_sentence_sentiment(item))
+    return sentences

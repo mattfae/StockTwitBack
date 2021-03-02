@@ -1,15 +1,14 @@
 from flask import Response, request, jsonify
 from flask import current_app as app
-from .stocktweets import StockTweet
 from .models import StockTweet
-import .sent_analyzer as sa
+from stocktwit.stockanalysis import StockAnalysis
 
 
 @app.route('/stocks/', methods=['GET'])
 def get_all():
     if request.method == 'GET':
         print("starting old_request")
-        tweets = Stock.objects()
+        tweets = StockTweet.objects()
         return jsonify(tweets)
 
 
@@ -17,7 +16,7 @@ def get_all():
 def get_stock_results(stock):
     if request.method == 'GET':
         print("starting old_request")
-        tweets = Stock.objects()
+        tweets = StockTweet.objects()
         return jsonify(tweets)
 
 
