@@ -17,7 +17,7 @@ class StockTweet(db.Document):
     #cleaned tweets + assigned weights from vader
     scored_tweets = db.ListField(db.DictField())
     #stock data taken from Alpha Vantage
-    raw_stock_data = db.DictField()
+    market_data = db.DictField()
     
     def save(self, *args, **kwargs):
         if not self.created:

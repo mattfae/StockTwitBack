@@ -11,7 +11,7 @@ def clean_tweet(tweet):
 
 def get_sentence_sentiment(sentence):
     sia = SentimentIntensityAnalyzer()
-    return (f'{sentence}: {sia.polarity_scores(sentence)}')
+    return (f'"{sentence}": {sia.polarity_scores(sentence)}')
 
 
 def process_tweets(tweets):
