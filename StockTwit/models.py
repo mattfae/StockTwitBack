@@ -7,13 +7,12 @@ class StockTweet(db.Document):
     modified = db.DateTimeField(default=datetime.now())
     
     #Stock Symbol
-    stock = db.StringField()
+    stock_symbol = db.StringField()
     #the open date to compare with the previous day's close
     open_date = db.DateTimeField()
+    close_date = db.DateTimeField()
     #tweets as taken directly from Twitter API
     raw_tweet_data = db.ListField(db.DictField())
-    #tweets cleaned in preparation for analysis
-    clean_tweets_info = db.ListField(db.DictField())
     #cleaned tweets + assigned weights from vader
     scored_tweets = db.ListField(db.DictField())
     #stock data taken from Alpha Vantage

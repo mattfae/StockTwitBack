@@ -24,7 +24,7 @@ class StockAnalysis:
         self.stock_symbol = _stock_symbol
         self.open_date = datetime.strptime(_open_date, '%Y-%m-%d')
         self.close_date = self.open_date - timedelta(days=1)
-        self.raw_tweet_info = list()
+        self.raw_tweet_data = list()
         self.scored_tweets = list()
         self.market_data = None
 
@@ -33,7 +33,8 @@ class StockAnalysis:
         #use tweepy to geat relevant tweets
         print("starting get_tweets")
         for tweet in tweepy.Cursor(api.search, q=f'${self.stock_symbol}', until=self.open_date.strftime("%Y-%m-%d"), count=5).items(5):
-            self.raw_tweet_info.append(tweet)
+            self.raw_tweet_data.append(tweet)
+
 
     def get_market_data(self):
         print(f'starting request for {self.stock_symbol} using {AV_API_KEY}.')
@@ -46,8 +47,8 @@ class StockAnalysis:
 
 
     def analyze_tweets(self):
-        tweets = [tweet.text for tweet in self.raw_tweet_info]
-        #tweets = map(sa.process_tweet, self.raw_tweet_info
+        tweets = [tweet.text for tweet in self.raw_tweet_data]
+        #tweets = map(sa.process_tweet, self.raw_tweet_data
         return tweets
 
 
