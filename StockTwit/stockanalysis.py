@@ -36,6 +36,11 @@ class StockAnalysis:
             self.raw_tweet_data.append(tweet)
 
 
+    def analyze_tweets(self):
+        tweets = [tweet.text for tweet in self.raw_tweet_data]
+        self.scored_tweets = list(map(sa.process_tweet, tweets))
+
+
     def get_market_data(self):
         print(f'starting request for {self.stock_symbol} using {AV_API_KEY}.')
         try:
@@ -46,12 +51,6 @@ class StockAnalysis:
         self.market_data = json.loads(resp_data.content.decode('utf-8'))
 
 
-    def analyze_tweets(self):
-        tweets = [tweet.text for tweet in self.raw_tweet_data]
-        #tweets = map(sa.process_tweet, self.raw_tweet_data
-        return tweets
-
-
 pdb.set_trace()
-#new = StockAnalysis('aapl', '2021-02-25')
+#new = StockAnalysis('aapl', '2021-03-10')
 #okay

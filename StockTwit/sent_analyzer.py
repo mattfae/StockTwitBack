@@ -11,12 +11,11 @@ def clean_tweet(tweet):
 
 def get_sentence_sentiment(sentence):
     sia = SentimentIntensityAnalyzer()
-    return (f'"{sentence}": {sia.polarity_scores(sentence)}')
+    return {
+        sentence : sia.polarity_scores(sentence)
+        }
 
 
-def process_tweets(tweets):
-    sentences = []
-    for tweet in tweets:
-        for item in sent_tokenize(clean_tweet(tweet)):
-            sentences.append(get_sentence_sentiment(item))
-    return sentences
+def process_tweet(tweet):
+    #clean tweetn, then 
+    return get_sentence_sentiment(clean_tweet(tweet))
