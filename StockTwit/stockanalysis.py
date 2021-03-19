@@ -50,12 +50,12 @@ class StockAnalysis:
 
 
     def process_tweet(tweet):
-        return get_sentence_sentiment(clean_tweet(tweet))
+        return self.get_sentence_sentiment(self.clean_tweet(tweet))
 
 
     def analyze_tweets(self):
         tweets = [tweet.text for tweet in self.raw_tweet_data]
-        self.scored_tweets = list(map(process_tweet, tweets))
+        self.scored_tweets = list(map(self.process_tweet(), tweets))
 
 
     def get_market_data(self):
@@ -67,5 +67,3 @@ class StockAnalysis:
         
         self.market_data = json.loads(resp_data.content.decode('utf-8'))
 
-
-#okay
