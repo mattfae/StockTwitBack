@@ -6,7 +6,7 @@ import pdb
 from nltk import sent_tokenize
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from datetime import datetime, timedelta
-from decouple import configs
+from decouple import config
 
 
 CONSUMER_KEY = config('TWITTER_CONSUMER_KEY')
@@ -50,7 +50,6 @@ class StockAnalysis:
 
 
     def process_tweet(tweet):
-        #clean tweetn, then 
         return get_sentence_sentiment(clean_tweet(tweet))
 
 
@@ -68,8 +67,5 @@ class StockAnalysis:
         
         self.market_data = json.loads(resp_data.content.decode('utf-8'))
 
-
-
-new = StockAnalysis('aapl', '2021-03-16')
 
 #okay

@@ -1,7 +1,7 @@
 from flask import Response, request, jsonify
 from flask import current_app as app
 from .models import StockTweet
-from stockanalysis import StockAnalysis
+from .stockanalysis import StockAnalysis
 
 
 @app.route('/stocks/', methods=['GET'])
