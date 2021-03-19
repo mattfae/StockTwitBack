@@ -1,4 +1,5 @@
 from stocktwit import create_app
+from stocktwit.models import StockTweet
 import pdb
 
 app = create_app()

@@ -1,10 +1,12 @@
 import tweepy
+import re
 import requests
 import json
-from datetime import datetime, timedelta
-from decouple import config
-import sent_analyzer as sa
 import pdb
+from nltk import sent_tokenize
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from datetime import datetime, timedelta
+from decouple import configs
 
 
 CONSUMER_KEY = config('TWITTER_CONSUMER_KEY')
@@ -36,9 +38,25 @@ class StockAnalysis:
             self.raw_tweet_data.append(tweet)
 
 
+    def clean_tweet(tweet):
+        tweet = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
+                   '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', tweet)
+        return re.sub("(@[A-Za-z0-9_]+)","", tweet)
+
+
+    def get_sentence_sentiment(sentence):
+        sia = SentimentIntensityAnalyzer()
+        return {sentence : polarity_scores(sentence)}
+
+
+    def process_tweet(tweet):
+        #clean tweetn, then 
+        return get_sentence_sentiment(clean_tweet(tweet))
+
+
     def analyze_tweets(self):
         tweets = [tweet.text for tweet in self.raw_tweet_data]
-        self.scored_tweets = list(map(sa.process_tweet, tweets))
+        self.scored_tweets = list(map(process_tweet, tweets))
 
 
     def get_market_data(self):
@@ -51,6 +69,7 @@ class StockAnalysis:
         self.market_data = json.loads(resp_data.content.decode('utf-8'))
 
 
-pdb.set_trace()
-#new = StockAnalysis('aapl', '2021-03-10')
+
+new = StockAnalysis('aapl', '2021-03-16')
+
 #okay
